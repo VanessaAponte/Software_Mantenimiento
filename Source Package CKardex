@@ -1,0 +1,91 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package control;
+
+import datos.Kardex;
+import datos.Maquina;
+import datos.Pieza;
+import datos.Mecanico;
+import java.util.List;
+
+/**
+ *
+ * @author Vanessa/Sergio
+ */
+
+public class CKardex {
+    
+    Kardex kardex;
+
+//----------------------------- CONSTRUCTOR ------------------------------//
+
+    public CKardex() {
+        kardex = new Kardex();
+    }
+
+    public void setKardex(Kardex kardex) {
+        this.kardex= kardex;
+    }
+
+    public Kardex getKardex() {
+        return kardex;
+    }
+    
+//--------------------------- INSERTAR -----------------------------------//
+    
+    public Integer registrar(String fecha, String tiempo_mant,int cantidad_defect, String tipo_mant, int cod_maq, int cod_pie, int cod_mec) {
+        kardex.setFecha(fecha);
+        kardex.setTiempo_mant(tiempo_mant);
+        kardex.setCantidad_defect(cantidad_defect);
+        kardex.setTipo_mant(tipo_mant);
+        kardex.setCod_maq(new Maquina(cod_maq));
+        kardex.setCod_pie(new Pieza(cod_pie));
+        kardex.setCod_mec(new Mecanico(cod_mec));
+       
+        Integer cod_kardex = kardex.insertar();
+        return cod_kardex;
+    }
+    
+ //--------------------------- MODIFICAR -----------------------------------//
+    
+    public void modificar(int cod_kardex,String fecha, String tiempo_mant, int cantidad_defect, String tipo_mant, int cod_maq, int cod_pie, int cod_mec) {
+        kardex.setFecha(fecha);
+        kardex.setTiempo_mant(tiempo_mant);
+        kardex.setCantidad_defect(cantidad_defect);
+        kardex.setTipo_mant(tipo_mant);
+        kardex.setCod_maq(new Maquina(cod_maq));
+        kardex.setCod_pie(new Pieza(cod_pie));
+        kardex.setCod_mec(new Mecanico(cod_mec));
+      
+        
+        kardex.modificar();
+    }
+   
+// //--------------------------- ELIMINAR -----------------------------------//
+    
+    public void eliminar(int cod_kardex){
+        kardex.setCod_kardex(cod_kardex);
+        kardex.eliminar();
+    }
+  
+ // //--------------------------- LISTAR -----------------------------------//
+    
+    public List ObtenerLista(){
+        List lista = kardex.listar();
+        return lista;
+    }    
+
+//--------------------------- BUSCAR POR CODIGO -----------------------------//
+    
+    public Kardex buscar(int cod_kardex){
+        kardex.setCod_kardex(cod_kardex);
+        boolean encontro = kardex.obtener(cod_kardex);
+        if(encontro){
+            return kardex;
+        }else{
+            return null;
+        }
+    }    
+}
