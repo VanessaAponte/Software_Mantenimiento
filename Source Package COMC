@@ -1,0 +1,88 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package control;
+
+import datos.OMC;
+import datos.Maquina;
+import datos.Mecanico;
+import java.util.List;
+
+/**
+ *
+ * @author Vanessa/Sergio
+ */
+
+public class COMC {
+    
+    OMC omc;
+
+//----------------------------- CONSTRUCTOR ------------------------------//
+
+    public COMC() {
+        omc = new OMC();
+    }
+
+    public void setOmc(OMC omc) {
+        this.omc= omc;
+    }
+
+    public OMC getOmc() {
+        return omc;
+    }
+    
+//--------------------------- INSERTAR -----------------------------------//
+    
+    public Integer registrar(String fecha, String motivo, int cod_maq, int cod_mec) {
+        omc.setFecha(fecha);
+        omc.setMotivo(motivo);
+        
+        omc.setCod_maq(new Maquina(cod_maq));
+        omc.setCod_mec(new Mecanico(cod_mec));
+        
+       
+        Integer nro_omc = omc.insertar();
+        return nro_omc;
+    }
+    
+ //--------------------------- MODIFICAR -----------------------------------//
+    
+    public void modificar(int nro_omc,String fecha, String motivo, int cod_maq, int cod_mec) {
+       
+        omc.setFecha(fecha);
+        omc.setMotivo(motivo);
+    
+        omc.setCod_maq(new Maquina(cod_maq));
+        omc.setCod_mec(new Mecanico(cod_mec));
+        
+        
+        omc.modificar();
+    }
+   
+// //--------------------------- ELIMINAR -----------------------------------//
+    
+    public void eliminar(int nro_omc){
+        omc.setNro_omc(nro_omc);
+        omc.eliminar();
+    }
+  
+ // //--------------------------- LISTAR -----------------------------------//
+    
+    public List ObtenerLista(){
+        List lista = omc.listar();
+        return lista;
+    }    
+
+//--------------------------- BUSCAR POR CODIGO -----------------------------//
+    
+    public OMC buscar(int nro_omc){
+        omc.setNro_omc(nro_omc);
+        boolean encontro = omc.obtener(nro_omc);
+        if(encontro){
+            return omc;
+        }else{
+            return null;
+        }
+    }    
+}
