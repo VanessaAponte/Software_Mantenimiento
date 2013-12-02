@@ -1,0 +1,88 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package control;
+
+import datos.OMP;
+import datos.Maquina;
+import datos.Mecanico;
+import java.util.List;
+
+/**
+ *
+ * @author Vanessa/Sergio
+ */
+
+public class COMP {
+    
+    OMP omp;
+
+//----------------------------- CONSTRUCTOR ------------------------------//
+
+    public COMP() {
+        omp = new OMP();
+    }
+
+    public void setOmp(OMP omp) {
+        this.omp= omp;
+    }
+
+    public OMP getOmp() {
+        return omp;
+    }
+    
+//--------------------------- INSERTAR -----------------------------------//
+    
+    public Integer registrar(String fecha, String motivo, int cod_maq, int cod_mec) {
+        omp.setFecha(fecha);
+        omp.setMotivo(motivo);
+        
+        omp.setCod_maq(new Maquina(cod_maq));
+        omp.setCod_mec(new Mecanico(cod_mec));
+        
+       
+        Integer nro_omp = omp.insertar();
+        return nro_omp;
+    }
+    
+ //--------------------------- MODIFICAR -----------------------------------//
+    
+    public void modificar(int nro_omp,String fecha, String motivo, int cod_maq, int cod_mec) {
+      
+        omp.setFecha(fecha);
+        omp.setMotivo(motivo);
+    
+        omp.setCod_maq(new Maquina(cod_maq));
+        omp.setCod_mec(new Mecanico(cod_mec));
+        
+        
+        omp.modificar();
+    }
+   
+// //--------------------------- ELIMINAR -----------------------------------//
+    
+    public void eliminar(int nro_omp){
+        omp.setNro_omp(nro_omp);
+        omp.eliminar();
+    }
+  
+ // //--------------------------- LISTAR -----------------------------------//
+    
+    public List ObtenerLista(){
+        List lista = omp.listar();
+        return lista;
+    }    
+
+//--------------------------- BUSCAR POR CODIGO -----------------------------//
+    
+    public OMP buscar(int nro_omp){
+        omp.setNro_omp(nro_omp);
+        boolean encontro = omp.obtener(nro_omp);
+        if(encontro){
+            return omp;
+        }else{
+            return null;
+        }
+    }    
+}
