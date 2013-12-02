@@ -1,0 +1,80 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package control;
+
+import datos.Mecanico;
+import datos.Persona;
+import java.util.List;
+
+/**
+ *
+ * @author Vanessa/Sergio
+ */
+
+public class CMecanico {
+    
+    Mecanico mecanico;
+
+//----------------------------- CONSTRUCTOR ------------------------------//
+
+    public CMecanico() {
+        mecanico = new Mecanico();
+    }
+
+    public void setMecanico(Mecanico mecanico) {
+        this.mecanico= mecanico;
+    }
+
+    public Mecanico getMecanico() {
+        return mecanico;
+    }
+    
+//--------------------------- INSERTAR -----------------------------------//
+    
+    public Integer registrar(int cod_per) {
+        
+        mecanico.setCod_per(new Persona(cod_per));
+        
+       
+        Integer cod_mecanico = mecanico.insertar();
+        return cod_mecanico;
+    }
+    
+ //--------------------------- MODIFICAR -----------------------------------//
+    
+    public void modificar(int cod_mecanico,int cod_per) {
+     
+        mecanico.setCod_per(new Persona(cod_per));
+        
+        
+        mecanico.modificar();
+    }
+   
+// //--------------------------- ELIMINAR -----------------------------------//
+    
+    public void eliminar(int cod_mecanico){
+        mecanico.setCod_mecanico(cod_mecanico);
+        mecanico.eliminar();
+    }
+  
+ // //--------------------------- LISTAR -----------------------------------//
+    
+    public List ObtenerLista(){
+        List lista = mecanico.listar();
+        return lista;
+    }    
+
+//--------------------------- BUSCAR POR CODIGO -----------------------------//
+    
+    public Mecanico buscar(int cod_mecanico){
+        mecanico.setCod_mecanico(cod_mecanico);
+        boolean encontro = mecanico.obtener(cod_mecanico);
+        if(encontro){
+            return mecanico;
+        }else{
+            return null;
+        }
+    }    
+}
