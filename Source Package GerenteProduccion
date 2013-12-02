@@ -1,0 +1,80 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package control;
+
+import datos.GerenteProd;
+import datos.Persona;
+import java.util.List;
+
+/**
+ *
+ * @author Vanessa/Sergio
+ */
+
+public class CGerenteProd {
+    
+    GerenteProd gerenteprod;
+
+//----------------------------- CONSTRUCTOR ------------------------------//
+
+    public CGerenteProd() {
+        gerenteprod = new GerenteProd();
+    }
+
+    public void setGerenteProd(GerenteProd gerenteprod) {
+        this.gerenteprod= gerenteprod;
+    }
+
+    public GerenteProd getGerenteProd() {
+        return gerenteprod;
+    }
+    
+//--------------------------- INSERTAR -----------------------------------//
+    
+    public Integer registrar(int cod_per) {
+        
+        gerenteprod.setCod_per(new Persona(cod_per));
+        
+       
+        Integer cod_gerenteprod = gerenteprod.insertar();
+        return cod_gerenteprod;
+    }
+    
+ //--------------------------- MODIFICAR -----------------------------------//
+    
+    public void modificar(int cod_gerenteprod,int cod_per) {
+    
+        gerenteprod.setCod_per(new Persona(cod_per));
+        
+        
+        gerenteprod.modificar();
+    }
+   
+// //--------------------------- ELIMINAR -----------------------------------//
+    
+    public void eliminar(int cod_gerenteprod){
+        gerenteprod.setCod_gerenteprod(cod_gerenteprod);
+        gerenteprod.eliminar();
+    }
+  
+ // //--------------------------- LISTAR -----------------------------------//
+    
+    public List ObtenerLista(){
+        List lista = gerenteprod.listar();
+        return lista;
+    }    
+
+//--------------------------- BUSCAR POR CODIGO -----------------------------//
+    
+    public GerenteProd buscar(int cod_gerenteprod){
+        gerenteprod.setCod_gerenteprod(cod_gerenteprod);
+        boolean encontro = gerenteprod.obtener(cod_gerenteprod);
+        if(encontro){
+            return gerenteprod;
+        }else{
+            return null;
+        }
+    }    
+}
