@@ -1,0 +1,93 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package control;
+
+import datos.ListaDefect;
+import datos.Maquina;
+import datos.Pieza;
+import datos.Kardex;
+import java.util.List;
+
+/**
+ *
+ * @author Vanessa/Sergio
+ */
+
+public class CListaDefect {
+    
+    ListaDefect listadefect;
+
+//----------------------------- CONSTRUCTOR ------------------------------//
+
+    public CListaDefect() {
+        listadefect = new ListaDefect();
+    }
+
+    public void setLista_defect(ListaDefect listadefect) {
+        this.listadefect= listadefect;
+    }
+
+    public ListaDefect getLista_defect() {
+        return listadefect;
+    }
+    
+//--------------------------- INSERTAR -----------------------------------//
+    
+    public Integer registrar(String fecha, int cod_maq, int cod_pie, int cod_kard, String tipo_mant, int cantidad) {
+        listadefect.setFecha(fecha);
+        listadefect.setCod_kard(new Kardex(cod_kard));
+        listadefect.setCod_maq(new Maquina(cod_maq));
+        listadefect.setCod_pie(new Pieza(cod_pie));
+      
+        listadefect.setTipo_mant(tipo_mant);
+        listadefect.setCantidad(cantidad);
+      
+       
+        Integer nro_lista = listadefect.insertar();
+        return nro_lista;
+    }
+    
+ //--------------------------- MODIFICAR -----------------------------------//
+    
+    public void modificar(int nro_lista,String fecha, int cod_kard, int cod_maq, int cod_pie, String tipo_mant, int cantidad) {
+        
+        listadefect.setFecha(fecha);
+        listadefect.setCod_kard(new Kardex(cod_kard));
+       
+        listadefect.setCod_maq(new Maquina(cod_maq));
+        listadefect.setCod_pie(new Pieza(cod_pie));
+        
+        listadefect.setTipo_mant(tipo_mant);
+        listadefect.setCantidad(cantidad);
+        
+        listadefect.modificar();
+    }
+   
+// //--------------------------- ELIMINAR -----------------------------------//
+    
+    public void eliminar(int nro_lista){
+        listadefect.setNro_lista(nro_lista);
+        listadefect.eliminar();
+    }
+  
+ // //--------------------------- LISTAR -----------------------------------//
+    
+    public List ObtenerLista(){
+        List lista = listadefect.listar();
+        return lista;
+    }    
+
+//--------------------------- BUSCAR POR CODIGO -----------------------------//
+    
+    public ListaDefect buscar(int nro_lista){
+        listadefect.setNro_lista(nro_lista);
+        boolean encontro = listadefect.obtener(nro_lista);
+        if(encontro){
+            return listadefect;
+        }else{
+            return null;
+        }
+    }    
+}
